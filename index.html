@@ -1,0 +1,67 @@
+const quizData = [
+  { question: "Qual a molécula que carrega a informação genética?", answer: "dna" },
+  { question: "Qual é a molécula que copia a informação do DNA para síntese de proteínas?", answer: "rna" },
+  { question: "Como se chama uma alteração na sequência do DNA?", answer: "mutação" },
+  { question: "Qual o par complementar da base adenina no DNA?", answer: "timina" },
+  { question: "Qual base nitrogenada não está presente no RNA?", answer: "timina" },
+  { question: "Qual molécula é responsável pela síntese de proteínas?", answer: "ribossomo" },
+  { question: "Como se chama o processo de duplicação do DNA?", answer: "replicação" },
+  { question: "Qual tipo de RNA transporta aminoácidos até o ribossomo?", answer: "rna transportador" },
+  { question: "Qual é a estrutura em forma de dupla hélice?", answer: "dna" },
+  { question: "Qual é o nome do conjunto completo de genes de um organismo?", answer: "genoma" }
+];
+
+let score = 0;
+
+const questionEl = document.getElementById("question");
+const answerInput = document.getElementById("answer");
+const submitBtn = document.getElementById("submitBtn");
+const feedbackEl = document.getElementById("feedback");
+const scoreEl = document.getElementById("score-display"); // opcional para mostrar pontuação
+
+function getRandomQuestion() {
+  const index = Math.floor(Math.random() * quizData.length);
+  return quizData[index];
+}
+
+let currentQuestion = getRandomQuestion();
+
+function loadQuestion() {
+  feedbackEl.textContent = "";
+  answerInput.value = "";
+  questionEl.textContent = currentQuestion.question;
+  answerInput.focus();
+  updateScore();
+}
+
+function updateScore() {
+  if(scoreEl) scoreEl.textContent = `Pontuação: ${score}`;
+}
+
+submitBtn.addEventListener("click", () => {
+  const userAnswer = answerInput.value.trim().toLowerCase();
+  const correctAnswer = currentQuestion.answer.toLowerCase();
+
+  if (!userAnswer) {
+    feedbackEl.textContent = "Por favor, digite uma resposta.";
+    return;
+  }
+
+  if (userAnswer === correctAnswer) {
+    feedbackEl.textContent = "Resposta correta! ✅";
+    score++;
+  } else {
+    feedbackEl.textContent = `Resposta errada! ❌ A resposta correta é: ${currentQuestion.answer}`;
+  }
+
+  currentQuestion = getRandomQuestion();
+
+  updateScore();
+
+  setTimeout(loadQuestion, 1500);
+});
+
+// Se quiser mostrar pontuação, adicione no HTML um elemento com id="score-display"
+// Por exemplo: <div id="score-display" style="margin-top:10px; font-weight:bold;"></div>
+
+loadQuestion();
