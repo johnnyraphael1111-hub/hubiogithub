@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  padding: 20px;
+}
+
+#game {
+  max-width: 600px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+#scoreboard {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#feedback {
+  margin-top: 15px;
+  font-weight: bold;
+  min-height: 24px;
+}
